@@ -6,7 +6,9 @@ import { JwtAuthGuard } from '../utils/security/guards/JWTAuthGuard';
 
 @Controller('/auth')
 export class AuthController {
-  constructor (private readonly authService: AuthService) {}
+  constructor (
+    private readonly authService: AuthService,
+  ) {}
 
   @Post('/register')
   register (@Body() body: CreateUserDTO) {
