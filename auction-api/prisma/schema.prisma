@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  username   String   @unique
+  password   String
+  firstName  String   @map("first_name")
+  lastName   String   @map("last_name")
+  middleName String?  @map("middle_name")
+  avatar     String?
+  auctions   Auction[]
+  bets       Bet[]
+
+  @@map("users")
+}
+
+model Auction {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  avatar      String
+  userId      String   @unique @map("user_id")
+  creator     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lots        Lot[]
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("auctions")
+}
+
+model Lot {
+  id          String   @id @default(uuid())
+  name        String
+  minPrice    Int      @map("min_price")
+  description String
+  auctionId   String   @unique @map("auction_id")
+  auction     Auction  @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  photos      String[]
+  bets        Bet[]
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("lots")
+}
+
+model Bet {
+  id        String   @id @default(uuid())
+  userId    String   @unique @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lotId     String   @unique @map("lot_id")
+  lot       Lot      @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  value     Int
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("bets")
+}
