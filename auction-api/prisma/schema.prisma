@@ -11,13 +11,13 @@ datasource db {
 }
 
 model User {
-  id         String   @id @default(uuid())
-  email      String   @unique
-  username   String   @unique
+  id         String    @id @default(uuid())
+  email      String    @unique
+  username   String    @unique
   password   String
-  firstName  String   @map("first_name")
-  lastName   String   @map("last_name")
-  middleName String?  @map("middle_name")
+  firstName  String    @map("first_name")
+  lastName   String    @map("last_name")
+  middleName String?   @map("middle_name")
   avatar     String?
   auctions   Auction[]
   bets       Bet[]
@@ -28,9 +28,9 @@ model User {
 model Auction {
   id          String   @id @default(uuid())
   name        String
-  description String
-  avatar      String
-  userId      String   @unique @map("user_id")
+  description String?
+  avatar      String?
+  userId      String   @map("user_id")
   creator     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   lots        Lot[]
   createdAt   DateTime @default(now()) @map("created_at")
@@ -38,12 +38,18 @@ model Auction {
   @@map("auctions")
 }
 
+enum State {
+  OPENED
+  CLOSED
+}
+
 model Lot {
   id          String   @id @default(uuid())
   name        String
   minPrice    Int      @map("min_price")
-  description String
+  description String?
   auctionId   String   @unique @map("auction_id")
+  state       State
   auction     Auction  @relation(fields: [auctionId], references: [id], onDelete: Cascade)
   photos      String[]
   bets        Bet[]
