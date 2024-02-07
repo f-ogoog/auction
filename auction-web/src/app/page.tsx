@@ -1,15 +1,10 @@
-"use client";
-
-import Button from "@/components/common/ui/button";
-import { ButtonVariant } from "@/components/common/ui/button/types";
+import PageLayout from "@/components/common/layout/page-layout";
+import HomePage from "@/components/templates/home-page";
 
 export default function Home() {
   return (
-    <Button
-      text="Click me!"
-      variant={ButtonVariant.FILLED}
-      onClick={() => console.log("123")}
-    />
+    <PageLayout>
+      <HomePage />
+    </PageLayout>
   );
 }
-

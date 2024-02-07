@@ -1,8 +1,8 @@
-import Header from "@/components/common/layout/header";
 import theme from "@/styles/theme";
-import { Container, ThemeProvider } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 import type { Metadata } from "next";
 
+import "@/styles/global-styles.scss";
 import "@/styles/reset.scss";
 
 export const metadata: Metadata = {
@@ -19,10 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ThemeProvider theme={theme}>
-        <body>
-          <Header />
-          <Container>{children}</Container>
-        </body>
+        <body>{children}</body>
       </ThemeProvider>
     </html>
   );

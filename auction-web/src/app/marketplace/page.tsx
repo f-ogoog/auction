@@ -1,7 +1,12 @@
-import { Typography } from "@mui/material";
+import PageLayout from "@/components/common/layout/page-layout";
+import MarketplacePage from "@/components/templates/marketplace-page";
 
 const Marketplace = () => {
-  return <Typography variant="h3">Marketplace</Typography>;
+  return (
+    <PageLayout>
+      <MarketplacePage />
+    </PageLayout>
+  );
 };
 
 export default Marketplace;
