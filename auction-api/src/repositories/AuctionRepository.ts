@@ -8,19 +8,36 @@ export class AuctionRepository {
     private readonly prismaService: PrismaService,
   ) {}
 
+  private readonly include = {
+    lots: true,
+  };
+
   create (data: Prisma.AuctionUncheckedCreateInput) {
-    return this.prismaService.auction.create({ data });
+    return this.prismaService.auction.create({
+      data,
+      include: this.include,
+    });
   }
 
   findById (id: string) {
     return this.prismaService.auction.findFirst({
       where: { id },
+      include: this.include,
+    });
+  }
+
+  updateById (id: string, data: Prisma.AuctionUncheckedUpdateInput) {
+    return this.prismaService.auction.update({
+      where: { id },
+      data,
+      include: this.include,
     });
   }
 
   deleteById (id: string) {
     return this.prismaService.auction.delete({
       where: { id },
+      include: this.include,
     });
   }
 }

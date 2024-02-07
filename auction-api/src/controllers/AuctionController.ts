@@ -1,9 +1,24 @@
-import { Body, Controller, Delete, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Req,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { AuctionService } from '../services/AuctionService';
-import { CreateAuctionDTO } from '../dtos/CreateAuctionDTO';
 import { JwtAuthGuard } from '../utils/security/guards/JWTAuthGuard';
-import { AuctionByIdPipe } from '../pipes/AuctionByIdPipe';
 import { CreatorAuctionGuard } from '../utils/security/guards/CreatorAuctionGuard';
+import { AuctionByIdPipe } from '../pipes/AuctionByIdPipe';
+import { ImageValidationPipe } from '../pipes/ImageValidationPipe';
+import { CreateAuctionDTO, UpdateAuctionDTO } from '../dtos/AuctionDTO';
+import { User } from '@prisma/client';
 
 @Controller('/auctions')
 export class AuctionController {
@@ -12,12 +27,14 @@ export class AuctionController {
   ) {}
 
   @UseGuards(JwtAuthGuard)
+  @UseInterceptors(FileInterceptor('avatar'))
   @Post()
   create (
-    @Req() req,
+    @Req() req: Request & { user: User },
     @Body() body: CreateAuctionDTO,
+    @UploadedFile(ImageValidationPipe) file: Express.Multer.File,
   ) {
-    return this.auctionService.create(req.user.id, body);
+    return this.auctionService.create(req.user.id, body, file);
   }
 
   @Get('/:auctionId')
@@ -28,9 +45,19 @@ export class AuctionController {
   }
 
   @UseGuards(JwtAuthGuard, CreatorAuctionGuard)
+  @UseInterceptors(FileInterceptor('avatar'))
+  @Patch('/:auctionId')
+  updateById (
+    @Param('auctionId', AuctionByIdPipe) auctionId: string,
+    @Body() body: UpdateAuctionDTO,
+    @UploadedFile(ImageValidationPipe) file: Express.Multer.File,
+  ) {
+    return this.auctionService.updateById(auctionId, body, file);
+  }
+
+  @UseGuards(JwtAuthGuard, CreatorAuctionGuard)
   @Delete('/:auctionId')
   delete (
-    @Req() req,
     @Param('auctionId', AuctionByIdPipe) auctionId: string
   ) {
     return this.auctionService.deleteById(auctionId);

@@ -25,22 +25,24 @@ model User {
   @@map("users")
 }
 
+enum State {
+  OPENED
+  CLOSED
+}
+
 model Auction {
   id          String   @id @default(uuid())
   name        String
   description String?
   avatar      String?
+  maxSlots    Int
+  state       State    @default(CLOSED)
   userId      String   @map("user_id")
   creator     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   lots        Lot[]
   createdAt   DateTime @default(now()) @map("created_at")
 
   @@map("auctions")
-}
-
-enum State {
-  OPENED
-  CLOSED
 }
 
 model Lot {
