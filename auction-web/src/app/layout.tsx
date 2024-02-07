@@ -1,6 +1,9 @@
+import Header from "@/components/common/layout/header";
 import theme from "@/styles/theme";
-import { ThemeProvider } from "@mui/material";
+import { Container, ThemeProvider } from "@mui/material";
 import type { Metadata } from "next";
+
+import "@/styles/reset.scss";
 
 export const metadata: Metadata = {
   title: "Auction",
@@ -16,7 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ThemeProvider theme={theme}>
-        <body>{children}</body>
+        <body>
+          <Header />
+          <Container>{children}</Container>
+        </body>
       </ThemeProvider>
     </html>
   );
