@@ -1,3 +1,5 @@
+import theme from "@/styles/theme";
+import { ThemeProvider } from "@mui/material";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <ThemeProvider theme={theme}>
+        <body>{children}</body>
+      </ThemeProvider>
     </html>
   );
 }
