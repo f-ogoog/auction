@@ -29,6 +29,14 @@ const palette: PaletteOptions = {
   white: {
     main: "#FFFFFF",
   },
+  warning: {
+    main: "#FF3093",
+    light: "#FFCBE4",
+  },
+  success: {
+    light: "#D2FFE4",
+    main: "#31A760",
+  }
 };
 
 export default palette;
