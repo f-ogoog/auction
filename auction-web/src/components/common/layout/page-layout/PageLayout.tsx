@@ -2,17 +2,20 @@ import React, { ReactNode } from "react";
 import { Box, Container } from "@mui/material";
 
 import Header from "../header";
+import Banner from "../banner";
+
+import { PageBanner } from "../banner/types";
 
 interface PageLayoutProps {
   children: ReactNode;
-  hasBanner?: boolean;
+  pageBanner?: PageBanner;
 }
 
-const PageLayout: React.FC<PageLayoutProps> = ({ children, hasBanner }) => {
+const PageLayout: React.FC<PageLayoutProps> = ({ children, pageBanner }) => {
   return (
     <Box>
       <Header />
-      {hasBanner && <Box>banner</Box>}
+      {pageBanner && <Banner pageBanner={pageBanner} />}
       <Container>{children}</Container>
     </Box>
   );
