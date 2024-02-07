@@ -1,7 +1,7 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { BadRequestException } from '@nestjs/common';
 
-export class AlreadyRegisteredException extends HttpException {
+export class AlreadyRegisteredException extends BadRequestException {
   constructor (field: string) {
-    super(`User with such ${field} already registered`, HttpStatus.BAD_REQUEST);
+    super(`User with such ${field} already registered`);
   }
 }

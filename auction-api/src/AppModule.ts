@@ -12,5 +12,4 @@ import { AuctionModule } from './modules/AuctionModule';
     }),
   ],
 })
-export class AppModule {
-}
+export class AppModule {}
