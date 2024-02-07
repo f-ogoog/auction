@@ -1,7 +1,14 @@
-import { Typography } from "@mui/material";
+import PageLayout from "@/components/common/layout/page-layout";
+import CreateSlotPage from "@/components/templates/create-slot-page";
+
+import { PageBanner } from "@/components/common/layout/banner/types";
 
 const CreateSlot = () => {
-  return <Typography variant="h3">Create Slot</Typography>;
+  return (
+    <PageLayout pageBanner={PageBanner.CREATE_SLOT}>
+      <CreateSlotPage />
+    </PageLayout>
+  );
 };
 
 export default CreateSlot;

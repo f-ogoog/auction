@@ -1,7 +1,12 @@
-import { Typography } from "@mui/material";
+import PageLayout from "@/components/common/layout/page-layout";
+import ProfilePage from "@/components/templates/profile-page";
 
 const Profile = () => {
-  return <Typography variant="h3">Profile</Typography>;
+  return (
+    <PageLayout>
+      <ProfilePage />
+    </PageLayout>
+  );
 };
 
 export default Profile;

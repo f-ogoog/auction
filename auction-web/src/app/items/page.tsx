@@ -1,7 +1,12 @@
-import { Typography } from "@mui/material";
+import PageLayout from "@/components/common/layout/page-layout";
+import ItemsPage from "@/components/templates/items-page/ItemsPage";
 
 const Items = () => {
-  return <Typography variant="h3">Items</Typography>;
+  return (
+    <PageLayout>
+      <ItemsPage />
+    </PageLayout>
+  );
 };
 
 export default Items;

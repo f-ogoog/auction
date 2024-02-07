@@ -3,6 +3,7 @@ import theme from "@/styles/theme";
 import { Container, ThemeProvider } from "@mui/material";
 import type { Metadata } from "next";
 
+import "@/styles/global-styles.scss";
 import "@/styles/reset.scss";
 
 export const metadata: Metadata = {
