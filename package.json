@@ -6,9 +6,5 @@
   "workspaces": [
     "auction-api",
     "auction-web"
-  ],
-  "dependencies": {
-    "@mui/icons-material": "^5.15.8",
-    "@mui/material": "^5.15.7"
-  }
+  ]
 }
