@@ -8,8 +8,11 @@ import * as process from 'process';
 @Injectable()
 export class FileService {
   constructor () {
-    const path = join(__dirname, 'static', 'avatars');
-    this.createIfNotExist(path);
+    const avatars = join(__dirname, 'static', 'avatars');
+    const photos = join(__dirname, 'static', 'photos');
+
+    this.createIfNotExist(avatars);
+    this.createIfNotExist(photos);
   }
 
   async saveByHash (file: Express.Multer.File, directory: string) {
@@ -19,6 +22,11 @@ export class FileService {
     await fs.promises.writeFile(filePath, file.buffer);
 
     return resolve(process.env.BASE_URL, join(directory, fileName + extname(file.originalname)));
+  }
+
+  getPhotosFromFiles (files: Express.Multer.File[]) {
+    const photoPromises  = files.map((file) => this.saveByHash(file, 'photos'));
+    return Promise.all(photoPromises);
   }
 
   private createIfNotExist (path: string) {
