@@ -1,32 +1,32 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { Box } from "@mui/material";
 
+import Header from "./components/header";
+import Price from "./components/price";
+import Footer from "./components/footer";
+
 import * as styles from "./Card.styles";
 
-import { CardType } from "./types";
+import { CardType } from "../types";
 
-interface CardProps<T extends CardType> {
-  content: React.ComponentType<T>;
-  contentProps: T;
-}
-
-const Card = <T extends CardType>({
-  content: Content,
-  contentProps,
-}: CardProps<T>) => {
+const Card: React.FC<CardType> = (props) => {
   return (
     <Box sx={styles.card}>
       <Box sx={styles.imageContainer}>
         <Image
-          src={contentProps.image}
-          alt={contentProps.auctionId}
+          src={props.image}
+          alt={props.auctionId}
           layout="fill"
-          objectFit="contain"
+          objectFit="cover"
         />
       </Box>
       <Box sx={styles.content}>
-        <Content {...contentProps} />
+        <Header {...props} />
+        <Price {...props} />
+        <Footer {...props} />
       </Box>
     </Box>
   );

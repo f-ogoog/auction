@@ -6,12 +6,6 @@ export const content: SxProps<Theme> = {
   gap: "16px",
 };
 
-export const header: SxProps<Theme> = {
-  display: "flex",
-  flexDirection: "column",
-  gap: "8px",
-};
-
 export const row: SxProps<Theme> = {
   display: "flex",
   justifyContent: "space-between",
