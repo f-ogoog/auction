@@ -1,6 +1,5 @@
-import Header from "@/components/common/layout/header";
 import theme from "@/styles/theme";
-import { Container, ThemeProvider } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 import type { Metadata } from "next";
 
 import "@/styles/global-styles.scss";
@@ -21,8 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <ThemeProvider theme={theme}>
         <body>
-          <Header />
-          <Container>{children}</Container>
+          {children}
         </body>
       </ThemeProvider>
     </html>
