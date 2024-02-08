@@ -1,9 +1,10 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { CreateUserDTO } from '../dtos/CreateUserDTO';
 import { UserRepository } from '../repositories/UserRepository';
 import { AlreadyRegisteredException } from '../utils/exceptions/AlreadyRegisteredException';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { CreateUserDTO } from '../dtos/UserDTO';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -17,10 +18,9 @@ export class AuthService {
 
     const user = await this.userRepository.find({
       username: securedUser.username,
-      email: securedUser.email,
     });
 
-    if (user) throw new AlreadyRegisteredException('username or email');
+    if (user) throw new AlreadyRegisteredException('username');
 
     const hashedPassword = await this.hashPassword(password);
 
@@ -36,9 +36,8 @@ export class AuthService {
   }
 
   async validateUser (username: string, password: string) {
-    const user = await this.userRepository.find({
-      OR: [{ username }, { email: username }],
-    });
+    const user = await this.userRepository.find({ username });
+    
     if (!user) throw new UnauthorizedException('Username or email is wrong');
 
     const comparedPasswords = await bcrypt.compare(password, user.password);
@@ -51,7 +50,7 @@ export class AuthService {
     return user;
   }
 
-  async login (user) {
+  async login (user: User) {
     return this.getAccessToken(user.id);
   }
 

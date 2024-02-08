@@ -18,7 +18,7 @@ import { CreatorAuctionGuard } from '../utils/security/guards/CreatorAuctionGuar
 import { AuctionByIdPipe } from '../pipes/AuctionByIdPipe';
 import { ImageValidationPipe } from '../pipes/ImageValidationPipe';
 import { CreateAuctionDTO, UpdateAuctionDTO } from '../dtos/AuctionDTO';
-import { User } from '@prisma/client';
+import { RequestWithUser } from '../utils/types';
 
 @Controller('/auctions')
 export class AuctionController {
@@ -30,7 +30,7 @@ export class AuctionController {
   @UseInterceptors(FileInterceptor('avatar'))
   @Post()
   create (
-    @Req() req: Request & { user: User },
+    @Req() req: RequestWithUser,
     @Body() body: CreateAuctionDTO,
     @UploadedFile(ImageValidationPipe) file: Express.Multer.File,
   ) {

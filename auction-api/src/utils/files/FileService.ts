@@ -8,10 +8,7 @@ import * as process from 'process';
 @Injectable()
 export class FileService {
   constructor () {
-    const staticDir = join(__dirname, 'static');
-    const path = join(staticDir, 'avatars');
-
-    this.createIfNotExist(staticDir);
+    const path = join(__dirname, 'static', 'avatars');
     this.createIfNotExist(path);
   }
 
@@ -26,7 +23,7 @@ export class FileService {
 
   private createIfNotExist (path: string) {
     if (!fs.existsSync(path)) {
-      fs.mkdirSync(path);
+      fs.mkdirSync(path, { recursive: true });
     }
   }
 }

@@ -33,6 +33,7 @@ export class AuctionService {
     }
 
     const avatar = file && await this.fileService.saveByHash(file, 'avatars');
+
     return this.auctionRepository.updateById(auctionId, { ...body, avatar });
   }
 
