@@ -7,8 +7,8 @@ const IMAGE_MAX_SIZE = 1048576;
 const IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.webp'];
 
 @Injectable()
-export class ImageValidationPipe implements PipeTransform {
-  transform (file: Express.Multer.File) {
+export class ImageValidationPipe implements PipeTransform<Express.Multer.File, Express.Multer.File> {
+  transform (file: Express.Multer.File): Express.Multer.File {
 
     if (!file) return;
 

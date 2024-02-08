@@ -1,13 +1,10 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { PartialType, PickType } from '@nestjs/swagger';
 
 export class CreateUserDTO {
   @IsNotEmpty()
   @IsString()
     username: string;
-
-  @IsNotEmpty()
-  @IsEmail()
-    email: string;
 
   @IsNotEmpty()
   @IsString()
@@ -25,3 +22,7 @@ export class CreateUserDTO {
   @IsString()
     middleName?: string;
 }
+
+export class UpdateUserDTO extends PartialType(
+  PickType(CreateUserDTO, ['firstName', 'middleName', 'lastName'])
+) {}
