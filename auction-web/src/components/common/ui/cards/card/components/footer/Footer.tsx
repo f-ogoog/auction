@@ -7,6 +7,7 @@ import Button from "@/components/common/ui/button";
 import * as styles from "./Footer.styles";
 
 import { CardFooterType } from "../../../types";
+import Pill from "@/components/common/ui/pill";
 
 const Footer: React.FC<CardFooterType> = (props) => {
   const isAuction = "slotsLeft" in props;
@@ -40,11 +41,15 @@ const Footer: React.FC<CardFooterType> = (props) => {
                 key={collector.id}
               />
             ))}
-            <Typography variant="body2">{props.owner.username}</Typography>
+            <Typography variant="body2">Collectors</Typography>
           </Box>
         </Box>
       )}
-      <Button text="See auction" />
+      <Box sx={styles.buttons}>
+        <Pill text={`1 Day : 20 hour : 50 min Left`} color="success" />
+        {isAuction && <Pill text={`${props.slotsLeft} / 12`} color="warning" />}
+        <Button text="See auction" />
+      </Box>
     </Box>
   );
 };

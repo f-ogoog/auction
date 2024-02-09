@@ -19,3 +19,9 @@ export const inline: SxProps<Theme> = {
   alignItems: "center",
   height: "40px",
 };
+
+export const buttons: SxProps<Theme> = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "16px",
+};
