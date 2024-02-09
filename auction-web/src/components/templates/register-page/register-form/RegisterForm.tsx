@@ -1,16 +1,21 @@
 "use client";
 
-import { Form, useForm } from "react-hook-form";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, TextField } from "@mui/material";
 
 import Button from "@/components/common/ui/button";
+import Input from "@/components/common/ui/input";
 
 import { validationSchema } from "./validation";
 import { RegisterFormFields } from "./types";
 
+import AuthApi from "@/lib/api/auth/AuthApi";
+import getErrorMessage from "@/lib/utils/getErrorMessage";
+
 import styles from "./RegisterForm.module.scss";
-import Input from "@/components/common/ui/input";
+import { FormHelperText } from "@mui/material";
 
 const RegisterForm = () => {
   const {
@@ -22,7 +27,22 @@ const RegisterForm = () => {
     resolver: zodResolver(validationSchema),
   });
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const [isSent, setIsSent] = useState(false);
+
+  const router = useRouter();
+
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setIsSent(true);
+      await AuthApi.register(data);
+      await router.push("/login");
+    } catch (error: unknown) {
+      const message = getErrorMessage(error);
+      setError("root", { message });
+    } finally {
+      setIsSent(false);
+    }
+  });
 
   return (
     <form onSubmit={onSubmit} className={styles.form}>
@@ -57,7 +77,10 @@ const RegisterForm = () => {
         type="password"
         error={errors.password?.message}
       />
-      <Button text="Register" type="submit" />
+      <Button text="Register" type="submit" disabled={isSent} />
+      {errors.root?.message && (
+        <FormHelperText error>{errors.root.message}</FormHelperText>
+      )}
     </form>
   );
 };
