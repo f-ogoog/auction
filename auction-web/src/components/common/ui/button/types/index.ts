@@ -23,7 +23,11 @@ export interface ButtonColorsStruct {
   textColorDisabled: string;
 }
 
-export type ButtonColorsMap = Record<
-  ButtonVariant,
-  Record<ButtonColor, ButtonColorsStruct>
->;
+export type ButtonColorsMap = {
+  [ButtonVariant.FILLED]: {
+    [key in ButtonColor]: ButtonColorsStruct;
+  };
+  [ButtonVariant.OUTLINE]: {
+    [key in ButtonColor.PRIMARY]: ButtonColorsStruct;
+  };
+};
