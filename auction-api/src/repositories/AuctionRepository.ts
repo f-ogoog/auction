@@ -26,6 +26,13 @@ export class AuctionRepository {
     });
   }
 
+  async findMany (args: Prisma.AuctionFindManyArgs) {
+    return this.prismaService.auction.findMany({
+      ...args,
+      include: this.include,
+    });
+  }
+
   updateById (id: string, data: Prisma.AuctionUncheckedUpdateInput) {
     return this.prismaService.auction.update({
       where: { id },
@@ -39,5 +46,9 @@ export class AuctionRepository {
       where: { id },
       include: this.include,
     });
+  }
+
+  count (data: Prisma.AuctionCountArgs): Promise<number> {
+    return this.prismaService.auction.count(data);
   }
 }

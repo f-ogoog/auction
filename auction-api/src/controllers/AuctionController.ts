@@ -24,6 +24,7 @@ import { RequestWithUser } from '../utils/types';
 import { CreateLotDTO, UpdateLotDTO } from '../dtos/LotDTO';
 import { ImagesValidationPipe } from '../pipes/ImagesValidationPipe';
 import { LotByIdPipe } from '../pipes/LotByIdPipe';
+import { QueryAllAuctionsDTO } from '../dtos/QueryAllAuctionsDTO';
 
 @Controller('/auctions')
 export class AuctionController {
@@ -40,6 +41,16 @@ export class AuctionController {
     @UploadedFile(ImageValidationPipe) file: Express.Multer.File,
   ) {
     return this.auctionService.create(req.user.id, body, file);
+  }
+
+  @Get()
+  async getAll (@Query() query: QueryAllAuctionsDTO) {
+    const { data, pagination } = await this.auctionService.getAll(query);
+
+    return {
+      auctions: Object.values(data).filter((item) => typeof item === 'object'),
+      pagination,
+    };
   }
 
   @Get('/:auctionId')

@@ -7,6 +7,8 @@ import { FileService } from '../utils/files/FileService';
 import { CreateLotDTO, UpdateLotDTO } from '../dtos/LotDTO';
 import { LotRepository } from '../repositories/LotRepository';
 import { NotBelongException } from '../utils/exceptions/NotBelongException';
+import { QueryAllAuctionsDTO } from '../dtos/QueryAllAuctionsDTO';
+import { DatabaseUtils } from '../utils/DatabaseUtils';
 
 const MIN_LOTS = 5;
 
@@ -18,9 +20,58 @@ export class AuctionService {
     private readonly fileService: FileService,
   ) {}
 
+  private AuctionSearching = {
+    name: (search: string) => ({
+      ...DatabaseUtils.getSearch({ search }, 'name'),
+    }),
+    categories: (categories: string[]) => ({
+      ...DatabaseUtils.getSearchByArray(categories, 'category'),
+    }),
+    minPrice: (minPrice: number) => {
+      if (!minPrice) return {};
+      return {
+        lots: {
+          some: {
+            minPrice: {
+              gte: minPrice,
+            },
+          },
+        },
+      };
+    },
+  };
+
+  private AuctionSorting = {
+    name: (order = 'asc') => ({ name: order }),
+  };
+
   async create (userId: string, body: CreateAuctionDTO, file: Express.Multer.File) {
     const avatar = file && await this.fileService.saveByHash(file, 'avatars');
     return this.auctionRepository.create({ userId, ...body, avatar });
+  }
+
+  async getAll (query: QueryAllAuctionsDTO) {
+    const {
+      sort: sortBy = 'name',
+      search: name,
+      order,
+      categories,
+      minPrice,
+    } = query;
+
+    const sort = this.AuctionSorting[sortBy](order);
+    const data = {
+      where: {
+        AND: [
+          this.AuctionSearching.name(name),
+          this.AuctionSearching.categories(categories),
+          this.AuctionSearching.minPrice(+minPrice),
+        ],
+      },
+      orderBy: sort,
+    };
+
+    return DatabaseUtils.paginate(this.auctionRepository, query, data);
   }
 
   findById (auctionId: string) {
@@ -46,7 +97,7 @@ export class AuctionService {
   }
 
   async createLot (auctionId: string, body: CreateLotDTO, files: Array<Express.Multer.File>) {
-    await this.checkOverflow(auctionId, files.length);
+    await this.checkOverflow(auctionId, files?.length);
     const photos = await this.fileService.getPhotosFromFiles(files);
 
     return this.lotRepository.create({ ...body, auctionId, photos });
@@ -95,5 +146,4 @@ export class AuctionService {
       throw new NotBelongException('lot', 'auction');
     }
   }
-
 }

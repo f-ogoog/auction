@@ -8,7 +8,7 @@ export class ImagesValidationPipe implements PipeTransform<Express.Multer.File[]
   ) {}
 
   transform (files: Express.Multer.File[]): Express.Multer.File[] {
-    for (const file of files) {
+    for (const file of files || []) {
       this.imageValidationPipe.transform(file);
     }
 
