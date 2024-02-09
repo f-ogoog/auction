@@ -6,7 +6,7 @@ export const price: SxProps<Theme> = {
   gap: "8px",
   paddingY: "16px",
   borderBlock: "1px solid",
-  borderColor: (theme) => theme.palette.gray[100],
+  borderColor: "gray.100",
 };
 
 export const row: SxProps<Theme> = {

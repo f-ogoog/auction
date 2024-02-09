@@ -10,7 +10,8 @@ export const card: SxProps<Theme> = {
   borderRadius: "16px",
   outline: "5px solid transparent",
   "&:hover": {
-    outlineColor: (theme) => theme.palette.primary.main,
+    // outlineColor: (theme) => theme.palette.primary.main,
+    outlineColor: "primary.main",
   },
 };
 
