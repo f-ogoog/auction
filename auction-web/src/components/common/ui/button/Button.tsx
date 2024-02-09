@@ -20,6 +20,7 @@ interface ButtonProps {
   icon?: ReactNode;
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  type?: "button" | "submit";
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -28,10 +29,15 @@ const Button: React.FC<ButtonProps> = ({
   color = ButtonColor.PRIMARY,
   icon,
   sx = {},
+  type = "button",
   ...rest
 }) => {
   return (
-    <MUIButton sx={mergeSx(styles.button(color, variant), sx)} {...rest}>
+    <MUIButton
+      sx={mergeSx(styles.button(color, variant), sx)}
+      type={type}
+      {...rest}
+    >
       <Typography variant="body1">{text}</Typography>
       {icon && <Box sx={styles.icon}>{icon}</Box>}
     </MUIButton>

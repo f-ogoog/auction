@@ -11,12 +11,15 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@hookform/resolvers": "^3.3.4",
+    "@mui/icons-material": "^5.15.8",
     "@mui/material": "^5.15.7",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.50.1",
     "sass": "^1.70.0",
-    "@mui/icons-material": "^5.15.8"
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",
