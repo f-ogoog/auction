@@ -1,6 +1,6 @@
 import StorageUtil from "@/lib/utils/StorageUtil";
-import AuthApi from "../../auth/AuthApi";
-import { LoginBody } from "../../auth/types/LoginBody";
+import AuthApi from "../../api/auth/AuthApi";
+import { LoginBody } from "../../api/auth/types/LoginBody";
 
 class AuthService {
   static async login(data: LoginBody) {

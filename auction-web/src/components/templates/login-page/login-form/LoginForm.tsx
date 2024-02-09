@@ -12,7 +12,7 @@ import Input from "@/components/common/ui/input";
 import { validationSchema } from "./validation";
 import { LoginFormFields } from "./types";
 
-import AuthService from "@/lib/api/services/auth/AuthService";
+import AuthService from "@/lib/services/auth/AuthService";
 import getErrorMessage from "@/lib/utils/getErrorMessage";
 
 import styles from "./LoginForm.module.scss";
