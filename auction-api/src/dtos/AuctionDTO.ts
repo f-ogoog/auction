@@ -12,6 +12,10 @@ export class CreateAuctionDTO {
   @Min(5)
     maxSlots: number;
 
+  @IsNotEmpty()
+  @IsString()
+    category: string;
+
   @IsOptional()
   @IsString()
     description?: string;

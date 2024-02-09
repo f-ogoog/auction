@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -36,6 +33,7 @@ model Auction {
   avatar      String?
   maxSlots    Int
   state       State    @default(CLOSED)
+  category    String
   userId      String   @map("user_id")
   creator     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   lots        Lot[]
@@ -49,8 +47,8 @@ model Lot {
   name        String
   minPrice    Int      @map("min_price")
   description String?
-  auctionId   String   @unique @map("auction_id")
-  state       State
+  auctionId   String   @map("auction_id")
+  state       State    @default(OPENED)
   auction     Auction  @relation(fields: [auctionId], references: [id], onDelete: Cascade)
   photos      String[]
   bets        Bet[]
@@ -61,9 +59,9 @@ model Lot {
 
 model Bet {
   id        String   @id @default(uuid())
-  userId    String   @unique @map("user_id")
+  userId    String   @map("user_id")
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  lotId     String   @unique @map("lot_id")
+  lotId     String   @map("lot_id")
   lot       Lot      @relation(fields: [lotId], references: [id], onDelete: Cascade)
   value     Int
   createdAt DateTime @default(now()) @map("created_at")
