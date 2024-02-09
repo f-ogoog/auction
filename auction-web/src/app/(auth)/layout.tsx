@@ -1,8 +1,20 @@
-import React, { PropsWithChildren } from "react";
+"use client";
+
+import useAuth from "@/hooks/use-auth";
 import { Grid, SxProps, Theme } from "@mui/material";
+import { useRouter } from "next/navigation";
+import React, { PropsWithChildren } from "react";
 import SideBar from "./components/sidebar";
 
 const AuthLayout: React.FC<PropsWithChildren> = ({ children }) => {
+  const { isLoggedIn } = useAuth();
+  const router = useRouter();
+
+  if (isLoggedIn) {
+    router.push("/");
+    return null;
+  }
+
   return (
     <Grid container>
       <Grid item xs={4}>

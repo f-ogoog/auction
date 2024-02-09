@@ -16,6 +16,7 @@ import AuthService from "@/lib/api/services/auth/AuthService";
 import getErrorMessage from "@/lib/utils/getErrorMessage";
 
 import styles from "./LoginForm.module.scss";
+import useAuth from "@/hooks/use-auth";
 
 const LoginForm = () => {
   const {
@@ -30,12 +31,13 @@ const LoginForm = () => {
   const [isSent, setIsSent] = useState(false);
 
   const router = useRouter();
+  const { update } = useAuth();
 
   const onSubmit = handleSubmit(async (data) => {
     try {
       setIsSent(true);
       await AuthService.login(data);
-      await router.push("/");
+      await update().then(() => router.push("/"));
     } catch (error: unknown) {
       const message = getErrorMessage(error);
       setError("root", { message });
