@@ -1,33 +1,19 @@
+"use client";
+
 import React from "react";
-import { Download } from "@/components/common/ui/download-button/types";
-import { getFiles } from "@/components/common/ui/download-button/utils/get-files";
-import Button from "@mui/material/Button";
-import * as styles from './DownloadButton.styles';
-import { Container, Typography } from "@mui/material";
+import PlusButton from "../plus-button";
+import { Plus } from "../plus-button/types";
 
-interface DownloadButtonProps {
-    download: Download;
-}
+const DownloadButton = () => {
+  const ref = React.useRef<HTMLInputElement | null>(null);
 
-const DownloadButton: React.FC<DownloadButtonProps> = ({ download }) => {
-    const { title, description } = getFiles(download);
+  const onClick = () => ref.current && ref.current.click();
 
-    return (
-        <Container sx={styles.buttonContainer}>
-            <Button
-                fullWidth
-                disableElevation
-                variant="outlined"
-                sx={styles.buttonContent}
-            >
-                <Container sx={styles.svgContainer}>
-                <img src="/icons/plus.svg" alt="plus" />
-                </Container>
-                <Typography sx={styles.title} variant="body1SemiBold">{title}</Typography>
-                <Typography sx={styles.description} variant="body2">{description}</Typography>
-            </Button>
-        </Container>
-    );
+  return (
+    <PlusButton onClick={onClick} type={Plus.DOWNLOAD}>
+      <input ref={ref} type="file" accept="image/*" hidden />
+    </PlusButton>
+  );
 };
 
 export default DownloadButton;

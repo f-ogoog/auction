@@ -1,7 +1,10 @@
-import { Typography } from "@mui/material";
+"use client";
+
+import CreateButton from "@/components/common/ui/create-button";
+import { Plus } from "@/components/common/ui/plus-button/types";
 
 const HomePage = () => {
-  return <Typography variant="h3">HomePage</Typography>;
+  return <CreateButton type={Plus.SLOT} onClick={() => "Hello world"} />;
 };
 
 export default HomePage;
