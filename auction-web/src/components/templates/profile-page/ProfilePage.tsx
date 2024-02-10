@@ -1,7 +1,14 @@
-import { Typography } from "@mui/material";
+import { Box } from "@mui/material";
+
+import * as styles from "./ProfilePage.styles";
+import UserInfo from "./components/user-info";
 
 const ProfilePage = () => {
-  return <Typography variant="h3">ProfilePage</Typography>;
+  return (
+    <Box sx={styles.stack}>
+      <UserInfo />
+    </Box>
+  );
 };
 
 export default ProfilePage;

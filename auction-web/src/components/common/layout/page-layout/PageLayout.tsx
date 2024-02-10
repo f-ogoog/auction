@@ -28,7 +28,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children, pageBanner }) => {
     <Box>
       <Header />
       {pageBanner && <Banner pageBanner={pageBanner} />}
-      <Container>{children}</Container>
+      <Container sx={{ paddingY: "50px" }}>{children}</Container>
     </Box>
   );
 };
