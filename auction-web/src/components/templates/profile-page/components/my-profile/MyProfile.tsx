@@ -7,6 +7,7 @@ import { Auction } from "@/types/auction";
 import { container } from "./MyProfile.styles";
 
 import image from "../../../../../../public/images/avatars/avatar1.webp";
+import MyBids from "./components/my-bids";
 
 const MyProfilePage = () => {
   const auctions: Auction = [
@@ -58,6 +59,7 @@ const MyProfilePage = () => {
       <Divider />
       <AuctionList auctions={auctions} max={4} />
       <Divider />
+      <MyBids />
     </Box>
   );
 };
