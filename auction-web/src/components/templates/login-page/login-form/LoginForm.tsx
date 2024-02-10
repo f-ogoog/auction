@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { FormHelperText } from "@mui/material";
 import Button from "@/components/common/ui/button";
-import Input from "@/components/common/ui/input";
+import Input from "@/components/common/ui/form/input";
 
 import { validationSchema } from "./validation";
 import { LoginFormFields } from "./types";

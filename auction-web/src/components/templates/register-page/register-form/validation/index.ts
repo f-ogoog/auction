@@ -1,6 +1,22 @@
 import { z } from "zod";
 
+const MAX_FILE_SIZE = 1048576;
+const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
+
 export const validationSchema = z.object({
+  avatar: z
+    .any()
+    .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 1MB.`)
+    .refine(
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+      "Only .jpg, .jpeg, .png and .webp formats are supported."
+    )
+    .optional(),
   username: z
     .string({ required_error: "Specify username" })
     .min(4, "Username must have at least 4 characters")
