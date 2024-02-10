@@ -29,7 +29,9 @@ const Input = (
         {...props}
       />
       {error && (
-        <FormHelperText id={`${id}-error-text`}>{error}</FormHelperText>
+        <FormHelperText id={`${id}-error-text`} error>
+          {error}
+        </FormHelperText>
       )}
     </FormControl>
   );
