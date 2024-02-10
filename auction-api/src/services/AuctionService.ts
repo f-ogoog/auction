@@ -74,6 +74,13 @@ export class AuctionService {
     return DatabaseUtils.paginate(this.auctionRepository, query, data);
   }
 
+  getAuctionsByUserId (userId: string) {
+    return this.auctionRepository.findMany({
+      where: { userId },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
   findById (auctionId: string) {
     return this.auctionRepository.findById(auctionId);
   }
