@@ -1,6 +1,7 @@
 import {
   ButtonColor,
   ButtonColorsMap,
+  ButtonColorsStruct,
   ButtonState,
   ButtonVariant,
 } from "../types";
@@ -39,18 +40,6 @@ const buttonColorsMap: ButtonColorsMap = {
       borderColor: ["violet.800", "violet.600", "violet.700", "violet.300"],
       textColorDisabled: "violet.300",
     },
-    [ButtonColor.BLACK]: {
-      textColor: [],
-      backgroundColor: [],
-      borderColor: [],
-      textColorDisabled: "",
-    },
-    [ButtonColor.WHITE]: {
-      textColor: [],
-      backgroundColor: [],
-      borderColor: [],
-      textColorDisabled: "",
-    },
   },
 };
 
@@ -67,12 +56,15 @@ const getColors = (
   state: ButtonState
 ) => {
   const stateIndex = stateMap[state];
+  const variantColors = buttonColorsMap[variant] as Record<
+    ButtonColor,
+    ButtonColorsStruct
+  >;
   return {
-    textColor: buttonColorsMap[variant][color].textColor[stateIndex],
-    backgroundColor:
-      buttonColorsMap[variant][color].backgroundColor[stateIndex],
-    borderColor: buttonColorsMap[variant][color].borderColor[stateIndex],
-    colorDisabled: buttonColorsMap[variant][color].textColorDisabled,
+    textColor: variantColors[color].textColor[stateIndex],
+    backgroundColor: variantColors[color].backgroundColor[stateIndex],
+    borderColor: variantColors[color].borderColor[stateIndex],
+    colorDisabled: variantColors[color].textColorDisabled,
   };
 };
 
