@@ -12,6 +12,13 @@ export class LotRepository {
     return this.prismaService.lot.create({ data });
   }
 
+  find (where: Prisma.LotWhereInput, orderBy?: Prisma.LotOrderByWithRelationInput | Prisma.LotOrderByWithRelationInput[]) {
+    return this.prismaService.lot.findFirst({
+      where,
+      orderBy,
+    })
+  }
+
   findById (id: string) {
     return this.prismaService.lot.findFirst({
       where: { id },

@@ -8,7 +8,7 @@ export class AuctionRepository {
     private readonly prismaService: PrismaService,
   ) {}
 
-  private readonly include = {
+  private readonly include: Prisma.AuctionInclude = {
     lots: true,
   };
 
@@ -39,6 +39,17 @@ export class AuctionRepository {
       data,
       include: this.include,
     });
+  }
+
+  updateMany (id) {
+    return this.prismaService.auction.updateMany({
+      where: {
+        id,
+      },
+      data: {
+
+      },
+    })
   }
 
   deleteById (id: string) {

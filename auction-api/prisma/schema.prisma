@@ -8,15 +8,18 @@ datasource db {
 }
 
 model User {
-  id         String    @id @default(uuid())
-  username   String    @unique
-  password   String
-  firstName  String    @map("first_name")
-  lastName   String    @map("last_name")
-  middleName String?   @map("middle_name")
-  avatar     String?
-  auctions   Auction[]
-  bets       Bet[]
+  id              String    @id @default(uuid())
+  username        String    @unique
+  password        String
+  firstName       String    @map("first_name")
+  lastName        String    @map("last_name")
+  middleName      String?   @map("middle_name")
+  avatar          String?
+  auctions        Auction[]
+  bets            Bet[]
+  messges         Message[]
+  roomId          String?
+  room            Room?     @relation(fields: [roomId], references: [id])
 
   @@map("users")
 }
@@ -35,18 +38,20 @@ enum Category {
 }
 
 model Auction {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   name        String
   description String?
   avatar      String?
   maxSlots    Int
-  state       State    @default(CLOSED)
+  state       State     @default(CLOSED)
   category    Category
-  userId      String   @map("user_id")
-  creator     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String    @map("user_id")
+  creator     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   lots        Lot[]
-  createdAt   DateTime @default(now()) @map("created_at")
-
+  createdAt   DateTime  @default(now()) @map("created_at")
+  messages    Message[]
+  roomId      String?    @unique @map("room_id")
+  room        Room?
   @@map("auctions")
 }
 
@@ -75,4 +80,25 @@ model Bet {
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("bets")
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  auctionId String   @map("auction_id")
+  auction   Auction  @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  value     String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("messages")
+}
+
+model Room {
+  id        String  @id @default(uuid())
+  auctionId String  @unique @map("auction_id")
+  auction   Auction @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  users     User[]
+
+  @@map("rooms")
 }

@@ -17,34 +17,39 @@ import { UpdateUserDTO } from '../dtos/UserDTO';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ImageValidationPipe } from '../pipes/ImageValidationPipe';
 import { JwtAuthGuard } from '../utils/security/guards/JWTAuthGuard';
+import { UserMapper } from '../mappers/UserMapper';
 
 @Controller('/users')
 export class UserController {
   constructor (
     private readonly userService: UserService,
+    private readonly userMapper: UserMapper,
   ) {}
 
   @Get('/:userId')
-  findById (
+  async findById (
     @Param('userId', UserByIdPipe) userId: string,
   ) {
-    return this.userService.findById(userId);
+    const user = await this.userService.findById(userId);
+    return this.userMapper.getUser(user);
   }
 
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('avatar'))
   @Patch()
-  updateMe (
+  async updateMe (
     @Req() req: RequestWithUser,
     @Body() body: UpdateUserDTO,
     @UploadedFile(ImageValidationPipe) file: Express.Multer.File,
   ) {
-    return this.userService.updateById(req.user.id, body, file);
+    const user = await this.userService.updateById(req.user.id, body, file);
+    return this.userMapper.getUser(user);
   }
 
   @UseGuards(JwtAuthGuard)
   @Delete()
-  deleteMe (@Req() req: RequestWithUser) {
-    return this.userService.deleteById(req.user.id);
+  async deleteMe (@Req() req: RequestWithUser) {
+    const user = await this.userService.deleteById(req.user.id);
+    return this.userMapper.getUser(user);
   }
 }
