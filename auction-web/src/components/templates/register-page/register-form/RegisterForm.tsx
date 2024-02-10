@@ -2,13 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, FormHelperText, Typography } from "@mui/material";
 
 import Button from "@/components/common/ui/button";
 import Input from "@/components/common/ui/form/input";
-import DownloadInput from "@/components/common/ui/form/download-input";
 
 import { validationSchema } from "./validation";
 import { RegisterFormFields } from "./types";
@@ -22,7 +21,6 @@ import * as sxStyles from "./RegisterForm.styles";
 const RegisterForm = () => {
   const {
     handleSubmit,
-    control,
     register,
     formState: { errors },
     setError,
@@ -49,26 +47,6 @@ const RegisterForm = () => {
 
   return (
     <form onSubmit={onSubmit} className={styles.form}>
-      <Box sx={sxStyles.row}>
-        <Controller
-          name="avatar"
-          render={({ field: { onChange } }) => (
-            <DownloadInput onChange={onChange} />
-          )}
-          control={control}
-        />
-        <Box sx={sxStyles.column}>
-          <Typography variant="h4">Avatar</Typography>
-          <Typography variant="body2" whiteSpace="pre-wrap" color="gray.200">
-            Your profile picture.{"\n"}It will be displayed on the site.
-          </Typography>
-          {errors.avatar?.message && (
-            <FormHelperText error>
-              {errors.avatar?.message as string}
-            </FormHelperText>
-          )}
-        </Box>
-      </Box>
       <Input
         id="username"
         label="Username"

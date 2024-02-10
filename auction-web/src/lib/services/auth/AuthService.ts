@@ -7,6 +7,10 @@ class AuthService {
     const { accessToken } = await AuthApi.login(data);
     StorageUtil.setToken(accessToken);
   }
+
+  static async logout() {
+    StorageUtil.removeToken();
+  }
 }
 
 export default AuthService;

@@ -6,7 +6,7 @@ import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import * as styles from "./DownloadInput.styles";
 
 interface DownloadInputProps {
-  onChange: (...event: any[]) => void;
+  onChange: React.Dispatch<React.SetStateAction<File | undefined>>;
 }
 
 const DownloadInput: React.FC<DownloadInputProps> = ({ onChange }) => {

@@ -11,10 +11,11 @@ interface InputProps {
   id: "username" | "password" | "firstName" | "lastName" | "middleName";
   type?: "text" | "password";
   error?: string;
+  defaultValue?: string;
 }
 
 const Input = (
-  { label, id, error, type = "text", ...props }: InputProps,
+  { label, id, error, type = "text", defaultValue, ...props }: InputProps,
   ref: React.Ref<HTMLInputElement>
 ) => {
   return (
@@ -26,6 +27,7 @@ const Input = (
         aria-describedby={`${id}-error-text`}
         ref={ref}
         type={type}
+        defaultValue={defaultValue}
         {...props}
       />
       {error && (

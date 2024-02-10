@@ -21,7 +21,7 @@ const palette: PaletteOptions = {
     500: "#9D59FF",
     600: "#9247FF",
     700: "#8835FF",
-    800: "#7B1§FF",
+    800: "#7B1FFF",
   },
   info: {
     main: "#FFF029",
@@ -36,7 +36,7 @@ const palette: PaletteOptions = {
   success: {
     light: "#D2FFE4",
     main: "#31A760",
-  }
+  },
 };
 
 export default palette;
