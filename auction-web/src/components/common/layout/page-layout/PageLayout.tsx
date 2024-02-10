@@ -9,6 +9,7 @@ import Banner from "../banner";
 import { PageBanner } from "../banner/types";
 import useAuth from "@/hooks/use-auth";
 import { useRouter } from "next/navigation";
+import AuthService from "@/lib/services/auth/AuthService";
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -20,6 +21,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children, pageBanner }) => {
   const router = useRouter();
 
   if (!isLoggedIn) {
+    AuthService.logout();
     router.push("/login");
     return null;
   }

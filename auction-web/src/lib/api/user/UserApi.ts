@@ -12,6 +12,14 @@ class UserApi {
     });
     return data;
   }
+
+  async deleteMe() {
+    const { data } = await client.delete<void>(
+      "/users",
+      getAuthorizationHeader()
+    );
+    return data;
+  }
 }
 
 export default new UserApi();
