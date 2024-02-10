@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 
 import "@/styles/global-styles.scss";
 import "@/styles/reset.scss";
+import AuthProvider from "@/hooks/use-auth/use-auth-context/AuthContext";
+import { ReactQueryProvider } from "@/providers/ReactRouterProvider";
 
 export const metadata: Metadata = {
   title: "Auction",
@@ -20,7 +22,9 @@ export default function RootLayout({
     <html lang="en">
       <ThemeProvider theme={theme}>
         <body>
-          {children}
+          <ReactQueryProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </ReactQueryProvider>
         </body>
       </ThemeProvider>
     </html>

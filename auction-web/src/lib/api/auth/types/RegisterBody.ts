@@ -1,9 +1,7 @@
-export interface User {
-  id: string;
-  email: string;
+export interface RegisterBody {
   username: string;
   firstName: string;
   lastName: string;
   middleName?: string;
-  avatar?: string;
+  password: string;
 }
