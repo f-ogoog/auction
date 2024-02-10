@@ -8,10 +8,12 @@ import Modal from "@/components/common/ui/modals/modal";
 import { useState } from "react";
 import Button from "@/components/common/ui/button";
 import { ButtonColor } from "@/components/common/ui/button/types";
+import { useRouter } from "next/navigation";
 
 const DeleteAccountButton = () => {
   const { update } = useAuth();
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <>
@@ -39,7 +41,7 @@ const DeleteAccountButton = () => {
             onClick={async () => {
               await UserApi.deleteMe();
               await AuthService.logout();
-              await update();
+              await update().then(() => router.push("/login"));
             }}
             text="Delete"
           ></Button>

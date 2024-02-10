@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, FormHelperText, Typography } from "@mui/material";
+import { Box, FormHelperText } from "@mui/material";
 
 import Button from "@/components/common/ui/button";
 import Input from "@/components/common/ui/form/input";

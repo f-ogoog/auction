@@ -6,5 +6,8 @@
   "workspaces": [
     "auction-api",
     "auction-web"
-  ]
+  ],
+  "dependencies": {
+    "@tanstack/react-query-devtools": "^5.20.1"
+  }
 }
