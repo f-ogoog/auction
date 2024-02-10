@@ -6,6 +6,7 @@ import Pagination from "@/components/common/ui/pagination";
 import * as styles from "./ProfilePage.styles";
 import { ProfileCategories } from "@/app/profile/page";
 import MyProfile from "./components/my-profile";
+import EditProfile from "./components/edit-profile";
 
 interface ProfilePageParams {
   searchParams: {
@@ -29,7 +30,11 @@ const ProfilePage = ({ searchParams }: ProfilePageParams) => {
     <Box sx={styles.stack}>
       <UserInfo />
       <Pagination items={items} />
-      {currentCategory === ProfileCategories.PROFILE && <MyProfile />}
+      {currentCategory === ProfileCategories.PROFILE ? (
+        <MyProfile />
+      ) : (
+        currentCategory === ProfileCategories.EDIT_PROFILE && <EditProfile />
+      )}
     </Box>
   );
 };

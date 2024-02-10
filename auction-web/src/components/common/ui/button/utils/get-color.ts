@@ -10,12 +10,7 @@ const buttonColorsMap: ButtonColorsMap = {
   [ButtonVariant.FILLED]: {
     [ButtonColor.PRIMARY]: {
       textColor: ["white.main", "white.main", "white.main"],
-      backgroundColor: [
-        "primary.main",
-        "violet.600",
-        "violet.700",
-        "violet.300",
-      ],
+      backgroundColor: ["violet.800", "violet.600", "violet.700", "violet.300"],
       borderColor: ["transparent", "transparent", "transparent", "transparent"],
       textColorDisabled: "white.main",
     },
