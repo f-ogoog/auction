@@ -15,7 +15,15 @@ const Header = ({ auctions }: { auctions: Auction[] }) => {
 
   return (
     <Box sx={styles.row}>
-      <Typography variant="h3">My auctions</Typography>
+      <Typography
+        variant="h3"
+        sx={{ display: "flex", alignItems: "center", gap: "8px" }}
+      >
+        My auctions{" "}
+        <Typography variant="body2" color="gray.300" component="span">
+          ({auctions.length})
+        </Typography>
+      </Typography>
       <Typography
         variant="body2"
         onClick={handleOpen}

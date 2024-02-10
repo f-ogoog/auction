@@ -36,8 +36,9 @@ const UserInfo = () => {
         />
       </Box>
       <Box sx={styles.stack}>
-        <Typography variant="h4" whiteSpace="pre-wrap">
-          {user.firstName} {user.lastName} {`\n`} {user.middleName}
+        <Typography variant="h2" whiteSpace="pre-wrap">
+          {user.firstName} {user.lastName} {`\n`}
+          {user.middleName}
         </Typography>
         <Typography variant="body2" color="gray.200">
           @{user.username}
