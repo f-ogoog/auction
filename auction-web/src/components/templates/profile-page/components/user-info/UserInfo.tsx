@@ -47,4 +47,4 @@ const UserInfo = () => {
   );
 };
 
-export default UserInfo;
+export default React.memo(UserInfo);
