@@ -37,28 +37,28 @@ const EditProfile = () => {
   const { user, update } = useAuth();
 
   const onSubmit = handleSubmit(async (data) => {
+    const formData = new FormData();
+    formData.append("body", JSON.stringify(data));
     if (avatar) {
-      const formData = new FormData();
       formData.append("avatar", avatar);
-      formData.append("body", JSON.stringify(data));
+    }
 
-      try {
-        setIsSent(true);
-        await UserApi.updateMe(formData);
-        await update().then(() =>
-          reset({
-            avatar: "",
-            firstName: user.firstName,
-            lastName: user.lastName,
-            middleName: user.middleName,
-          })
-        );
-      } catch (error: unknown) {
-        const message = getErrorMessage(error);
-        setError("root", { message });
-      } finally {
-        setIsSent(false);
-      }
+    try {
+      setIsSent(true);
+      await UserApi.updateMe(formData);
+      await update().then(() =>
+        reset({
+          avatar: "",
+          firstName: user.firstName,
+          lastName: user.lastName,
+          middleName: user.middleName,
+        })
+      );
+    } catch (error: unknown) {
+      const message = getErrorMessage(error);
+      setError("root", { message });
+    } finally {
+      setIsSent(false);
     }
   });
 
