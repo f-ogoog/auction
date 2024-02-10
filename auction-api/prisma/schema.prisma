@@ -26,6 +26,14 @@ enum State {
   CLOSED
 }
 
+enum Category {
+  Art
+  Music
+  Sport
+  Games
+  Photography
+}
+
 model Auction {
   id          String   @id @default(uuid())
   name        String
@@ -33,7 +41,7 @@ model Auction {
   avatar      String?
   maxSlots    Int
   state       State    @default(CLOSED)
-  category    String
+  category    Category
   userId      String   @map("user_id")
   creator     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   lots        Lot[]

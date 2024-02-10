@@ -24,8 +24,8 @@ export class FileService {
     return resolve(process.env.BASE_URL, join(directory, fileName + extname(file.originalname)));
   }
 
-  getPhotosFromFiles (files: Express.Multer.File[]) {
-    const photoPromises  = files.map((file) => this.saveByHash(file, 'photos'));
+  getPhotosFromFiles (files?: Express.Multer.File[]) {
+    const photoPromises  = files?.map((file) => this.saveByHash(file, 'photos')) || [];
     return Promise.all(photoPromises);
   }
 

@@ -1,6 +1,6 @@
 import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, Min } from 'class-validator';
 import { PartialType } from '@nestjs/swagger';
-import { State } from '@prisma/client';
+import { State, Category } from '@prisma/client';
 
 export class CreateAuctionDTO {
   @IsNotEmpty()
@@ -13,8 +13,8 @@ export class CreateAuctionDTO {
     maxSlots: number;
 
   @IsNotEmpty()
-  @IsString()
-    category: string;
+  @IsEnum(Category)
+    category: Category;
 
   @IsOptional()
   @IsString()
