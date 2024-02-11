@@ -2,7 +2,7 @@
 
 import Checkbox from "@/components/common/ui/checkbox";
 import { AuctionCategory } from "@/types/auction-category";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 
 import * as styles from "./Categories.styles";
@@ -17,6 +17,7 @@ const Categories = () => {
 
   return (
     <Box sx={styles.container}>
+      <Typography variant="h4">Category</Typography>
       {Object.entries(AuctionCategory).map(([key, value]) => (
         <Checkbox
           label={value}

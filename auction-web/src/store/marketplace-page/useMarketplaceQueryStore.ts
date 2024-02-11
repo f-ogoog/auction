@@ -25,7 +25,9 @@ interface MarketPlaceQueryStore {
 
 export const useMarketplaceQueryStore = create<MarketPlaceQueryStore>(
   (set) => ({
-    marketPlaceQuery: {},
+    marketPlaceQuery: {
+      pageSize: 9,
+    },
     setMinPrice: (minPrice: number) =>
       set((state) => ({
         marketPlaceQuery: { ...state.marketPlaceQuery, minPrice },
