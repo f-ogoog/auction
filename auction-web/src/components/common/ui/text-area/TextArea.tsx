@@ -38,4 +38,4 @@ const TextArea: React.FC<TextAreaProps> = ({ disabled = false, placeholder, requ
     );
 };
 
-export default TextArea;
+export default React.forwardRef(TextArea);

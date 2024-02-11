@@ -1,12 +1,10 @@
-import { SxProps } from '@mui/system';
-import { Theme } from '@mui/material/styles';
-import theme from "@/styles/theme";
+import { SxProps } from "@mui/system";
+import { Theme } from "@mui/material/styles";
 
 export const root: SxProps<Theme> = {
-    '& .MuiOutlinedInput-root': {
-        borderRadius: '12px',
-        padding: '0px 8px',
-        stroke: theme.palette.grey[50],
-        width: '450px'
-    },
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "12px",
+    padding: "0px 16px",
+    stroke: "gray.50",
+  },
 };

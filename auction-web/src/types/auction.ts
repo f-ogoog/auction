@@ -1,10 +1,18 @@
+import { AuctionCategory } from "./auction-category";
+
 export interface Auction {
   id: string;
   name: string;
-  description: string;
-  avatar: string;
+  description: string | null;
+  avatar: string | null;
   maxSlots: number;
-  category: string;
-  creator: string;
+  state: State;
+  category: AuctionCategory;
   userId: string;
+  createdAt: Date;
+}
+
+enum State {
+  OPENED = "opened",
+  CLOSED = "closed",
 }
