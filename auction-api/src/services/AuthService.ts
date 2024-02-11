@@ -5,12 +5,14 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDTO } from '../dtos/UserDTO';
 import { User } from '@prisma/client';
+import { UserMapper } from '../mappers/UserMapper';
 
 @Injectable()
 export class AuthService {
   constructor (
     private readonly userRepository: UserRepository,
     private readonly jwtService: JwtService,
+    private readonly userMapper: UserMapper,
   ) {}
 
   async register (body: CreateUserDTO) {
@@ -45,9 +47,7 @@ export class AuthService {
     if (!comparedPasswords)
       throw new UnauthorizedException('Password is wrong');
 
-    delete user.password;
-
-    return user;
+    return this.userMapper.getUser(user);
   }
 
   async login (user: User) {
