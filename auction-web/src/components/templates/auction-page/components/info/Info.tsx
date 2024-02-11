@@ -1,8 +1,10 @@
-import { Grid } from "@mui/material";
-import React from "react";
+import { Grid, Stack } from "@mui/material";
+
 import CurrentSlot from "./components/current-slot";
-import { Slot } from "@/types/Slot";
 import Bid from "./components/bid";
+import Members from "./components/members";
+
+import { Slot } from "@/types/Slot";
 
 const Info = ({ lot }: { lot: Slot }) => {
   return (
@@ -11,7 +13,10 @@ const Info = ({ lot }: { lot: Slot }) => {
         <CurrentSlot lot={lot} />
       </Grid>
       <Grid item xs={6}>
-        <Bid state={lot.state} minPrice={lot.minPrice} />
+        <Stack gap={2}>
+          <Bid state={lot.state} minPrice={lot.minPrice} />
+          <Members />
+        </Stack>
       </Grid>
     </Grid>
   );

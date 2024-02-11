@@ -24,7 +24,7 @@ const Bid: React.FC<BidProps> = ({ minPrice, state }) => {
         </Box>
         <Box sx={mergeSx(styles.price, { backgroundColor: "primary.main" })}>
           <Typography variant="h4" color="white.main">
-            Current price
+            Lead bid
           </Typography>
           <Typography variant="h3" color="white.main">
             $ {currentBid}
