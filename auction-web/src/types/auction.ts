@@ -1,3 +1,4 @@
+import { Slot } from "./Slot";
 import { AuctionCategory } from "./auction-category";
 
 export interface Auction {
@@ -10,6 +11,7 @@ export interface Auction {
   category: AuctionCategory;
   userId: string;
   createdAt: Date;
+  lots: Slot[];
 }
 
 enum State {
