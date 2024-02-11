@@ -7,8 +7,11 @@ interface CreateButtonProps {
   onClick: () => void;
 }
 
-const CreateButton: React.FC<CreateButtonProps> = ({ type, onClick }) => {
-  return <PlusButton type={type} onClick={onClick} />;
+const CreateButton: React.FC<CreateButtonProps> = ({ type, onClick}) => {
+  const handleClick = () => {
+    onClick();
+  };
+  return <PlusButton type={type} onClick={handleClick} />;
 };
 
 export default CreateButton;

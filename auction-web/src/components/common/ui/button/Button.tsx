@@ -29,6 +29,7 @@ const Button: React.FC<ButtonProps> = ({
   color = ButtonColor.PRIMARY,
   icon,
   sx = {},
+  disabled = false,
   type = "button",
   ...rest
 }) => {
@@ -37,6 +38,7 @@ const Button: React.FC<ButtonProps> = ({
       sx={mergeSx(styles.button(color, variant), sx)}
       type={type}
       {...rest}
+        disabled={disabled}
     >
       <Typography variant="body1">{text}</Typography>
       {icon && <Box sx={styles.icon}>{icon}</Box>}

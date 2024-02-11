@@ -1,7 +1,13 @@
-import { Typography } from "@mui/material";
+"use client";
+import ChooseAuctions from "@/components/templates/create-slot-page/components/choose-auctions/ChooseAuctions";
 
 const CreateSlotPage = () => {
-  return <Typography variant="h3">CreateSlotPage</Typography>;
+
+    return (
+        <>
+            <ChooseAuctions/>
+        </>
+    );
 };
 
 export default CreateSlotPage;
