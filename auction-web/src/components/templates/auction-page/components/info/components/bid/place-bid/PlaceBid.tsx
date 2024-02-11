@@ -7,15 +7,21 @@ import { row } from "../Bid.styles";
 import * as sxStyles from "./PlaceBid.styles";
 import styles from "./PlaceBid.module.scss";
 import Button from "@/components/common/ui/button";
+import { useWebSocket } from "@/components/templates/auction-page/context/WebSocketProvider";
+import useAuth from "@/hooks/use-auth";
 
 const PlaceBid = ({ currentBid }: { currentBid: number }) => {
   const ref = React.useRef<HTMLInputElement>(null);
   const [error, setError] = React.useState(false);
+  const { socket, lot } = useWebSocket();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (parseInt(ref.current?.value as string) > currentBid) {
-      console.log(ref.current?.value);
+      socket.emit("newBet", {
+        value: parseInt(ref.current?.value as string),
+        lotId: lot!.id,
+      });
       setError(false);
     } else {
       setError(true);

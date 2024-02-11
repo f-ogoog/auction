@@ -8,10 +8,6 @@
     "auction-web"
   ],
   "dependencies": {
-    "@tanstack/react-query-devtools": "^5.20.1"
-  }
-  ],
-  "dependencies": {
     "@nestjs/platform-socket.io": "^10.3.2",
     "@nestjs/schedule": "^4.0.1",
     "@nestjs/websockets": "^10.3.2"
