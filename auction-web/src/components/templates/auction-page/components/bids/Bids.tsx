@@ -13,9 +13,12 @@ import {
 } from "@mui/material";
 
 import * as styles from "./Bids.styles";
+import { useWebSocket } from "../../context/WebSocketProvider";
+import { Bet } from "@/types/bet";
 
 const Bids = () => {
   const [open, setOpen] = React.useState(true);
+  const { bets } = useWebSocket();
 
   return (
     <CollapseContainer
@@ -45,27 +48,41 @@ const Bids = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow>
-            <TableCell align="left" sx={styles.cell}>
-              <Typography variant="h4" color="gray.900">
-                $ 1000
-              </Typography>
-            </TableCell>
-            <TableCell align="center" sx={styles.cell}>
-              <Typography variant="body2" color="gray.900">
-                06.12.2023
-              </Typography>
-            </TableCell>
-            <TableCell align="right" sx={styles.cell}>
-              <Typography variant="body2" color="violet.800">
-                Virgin Marry
-              </Typography>
-            </TableCell>
-          </TableRow>
+          {bets.length > 0 ? (
+            <Tab bets={bets} />
+          ) : (
+            <Typography variant="h4" sx={{ padding: "24px" }}>
+              No bets
+            </Typography>
+          )}
         </TableBody>
       </Table>
+
+      {bets.length > 0 ? <Tab bets={bets} /> : null}
     </CollapseContainer>
   );
 };
 
 export default Bids;
+
+const Tab = ({ bets }: { bets: Bet[] }) => {
+  return bets.map((bet) => (
+    <TableRow key={bet.user.id}>
+      <TableCell align="left" sx={styles.cell}>
+        <Typography variant="h4" color="gray.900">
+          $ {bet.value}
+        </Typography>
+      </TableCell>
+      <TableCell align="center" sx={styles.cell}>
+        <Typography variant="body2" color="gray.900">
+          {new Date(Date.now()).toLocaleString().split(",")[0]}
+        </Typography>
+      </TableCell>
+      <TableCell align="right" sx={styles.cell}>
+        <Typography variant="body2" color="violet.800">
+          {bet.user.firstName} {bet.user.lastName}
+        </Typography>
+      </TableCell>
+    </TableRow>
+  ));
+};
