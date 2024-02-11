@@ -53,6 +53,12 @@ export class AuctionController {
     };
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('my')
+  getUserAuctions (@Req() req: RequestWithUser) {
+    return this.auctionService.getAuctionsByUserId(req.user.id);
+  }
+
   @Get('/:auctionId')
   findById (
     @Param('auctionId', AuctionByIdPipe) auctionId: string,
