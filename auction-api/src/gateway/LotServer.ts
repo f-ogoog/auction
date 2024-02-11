@@ -68,7 +68,7 @@ export class LotServer implements OnModuleInit, OnGatewayDisconnect  {
     data: CreateBetDTO,
   ) {
     const auctionId = client.handshake.query.auctionId;
-    const userId = client.handshake.query.auctionId;
+    const userId = client.handshake.query.userId;
 
     const bet = await this.gatewayService.createBet(data, userId, auctionId);
     const mappedBet = this.betMapper.getBet(bet);
