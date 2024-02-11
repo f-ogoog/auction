@@ -8,6 +8,7 @@ import Header from "./components/header";
 
 import * as styles from "./AuctionPage.styles";
 import Info from "./components/info";
+import Bids from "./components/bids";
 
 interface AuctionPageProps {
   auction?: Auction;
@@ -42,6 +43,7 @@ const AuctionPage: React.FC<AuctionPageProps> = ({ auction, isLoading }) => {
         </Box>
       </Box>
       <Info lot={auction!.lots[0]} />
+      <Bids />
     </Box>
   );
 };
