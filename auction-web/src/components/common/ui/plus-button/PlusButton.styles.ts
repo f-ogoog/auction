@@ -26,12 +26,10 @@ export const button = (plus: Plus): SxProps<Theme> => ({
       color: "primary.main",
     },
   }),
+  ...(plus === Plus.AUCTION && {
+    height: "484px",
+  })
 });
-
-export const svgContainer: SxProps<Theme> = {
-  marginBottom: "16px",
-  marginTop: "16px",
-};
 
 export const description: SxProps<Theme> = {
   color: "gray.200",

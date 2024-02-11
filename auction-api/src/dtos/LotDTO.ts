@@ -1,5 +1,6 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString, Min } from 'class-validator';
 import { PartialType } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 
 export class CreateLotDTO {
   @IsNotEmpty()
@@ -7,6 +8,7 @@ export class CreateLotDTO {
     name: string;
 
   @IsNotEmpty()
+  @Type(() => Number)
   @IsNumber({
     maxDecimalPlaces: 0,
   })
