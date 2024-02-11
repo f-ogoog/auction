@@ -62,6 +62,7 @@ export class AuctionService {
     const sort = this.AuctionSorting[sortBy](order);
     const data = {
       where: {
+        state: State.OPENED,
         AND: [
           this.AuctionSearching.name(name),
           this.AuctionSearching.categories(categories),
