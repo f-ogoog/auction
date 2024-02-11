@@ -8,6 +8,11 @@ class AuctionApi {
     });
     return data;
   }
+
+  async getAuction(id: string) {
+    const { data } = await client.get(`/auctions/${id}`);
+    return data;
+  }
 }
 
 export default new AuctionApi();

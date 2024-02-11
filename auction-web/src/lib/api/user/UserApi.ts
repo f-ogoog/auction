@@ -20,6 +20,11 @@ class UserApi {
     );
     return data;
   }
+
+  async getUser(userId: string) {
+    const { data } = await client.get<User>(`/users/${userId}`);
+    return data;
+  }
 }
 
 export default new UserApi();
