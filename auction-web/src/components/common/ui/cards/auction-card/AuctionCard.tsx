@@ -10,7 +10,10 @@ import Button from "../../button";
 import { useRouter } from "next/navigation";
 
 const AuctionCard: React.FC<
-  Omit<Auction, "description" | "maxSlots" | "state" | "userId" | "createdAt">
+  Omit<
+    Auction,
+    "description" | "maxSlots" | "state" | "userId" | "createdAt" | "lots"
+  >
 > = ({ id, avatar, category, name }) => {
   const router = useRouter();
 
